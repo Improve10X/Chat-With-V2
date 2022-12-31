@@ -49,9 +49,14 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
         });
         holder.binding.deleteBtn.setOnClickListener(view -> {
                 onItemActionListener.onDelete(template.id);
+                holder.binding.actionLayout.setVisibility(View.GONE);
         });
         holder.binding.editBtn.setOnClickListener(view -> {
             onItemActionListener.onEdit(template);
+            holder.binding.actionLayout.setVisibility(View.GONE);
+        });
+        holder.binding.getRoot().setOnClickListener(view -> {
+            onItemActionListener.onClicked(template);
         });
     }
 

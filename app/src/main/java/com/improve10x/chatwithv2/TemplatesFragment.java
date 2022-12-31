@@ -38,7 +38,6 @@ public class TemplatesFragment extends Fragment {
         templatesBinding = FragmentTemplatesBinding.inflate(getLayoutInflater());
         setTemplatesRv();
         handleAddFab();
-        fetchData();
         return templatesBinding.getRoot();
     }
 
@@ -70,6 +69,11 @@ public class TemplatesFragment extends Fragment {
                 editTemplate(template);
 
             }
+
+            @Override
+            public void onClicked(Template template) {
+                onClick(template);
+            }
         });
         templatesBinding.templatesRv.setAdapter(templatesAdapter);
     }
@@ -93,6 +97,7 @@ public class TemplatesFragment extends Fragment {
                             for (QueryDocumentSnapshot document: task.getResult()) {
                                 Template template = document.toObject(Template.class);
                                 template.id = document.getId();
+                                templates.add(template);
                             }
                                 templatesAdapter.setTemplates(templates);
 
@@ -117,5 +122,11 @@ public class TemplatesFragment extends Fragment {
                     }
                 });
 
+    }
+
+    private void onClick(Template template) {
+        Intent intent = new Intent(getActivity(), HomeFragment.class);
+        intent.putExtra("templates", template);
+        startActivity(intent);
     }
 }

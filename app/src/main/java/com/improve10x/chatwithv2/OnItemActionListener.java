@@ -6,4 +6,6 @@ public interface OnItemActionListener {
 
     void onEdit(Template template);
 
+    void onClicked(Template template);
+
 }
