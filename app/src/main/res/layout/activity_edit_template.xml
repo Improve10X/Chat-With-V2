@@ -16,6 +16,7 @@
         app:boxBackgroundColor="#FBFAFA">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/titleTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -28,13 +29,14 @@
         app:boxBackgroundColor="#FBFAFA">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/messageTxt"
             android:layout_width="match_parent"
             android:layout_height="173dp"
             android:hint="hint" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/editBtn"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"

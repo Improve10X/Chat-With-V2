@@ -1,6 +1,8 @@
 package com.improve10x.chatwithv2;
 
-public class Template {
+import java.io.Serializable;
+
+public class Template implements Serializable {
 
     public String id;
     

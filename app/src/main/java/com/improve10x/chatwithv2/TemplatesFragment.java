@@ -16,7 +16,9 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.chatwithv2.databinding.FragmentTemplatesBinding;
 
@@ -36,6 +38,7 @@ public class TemplatesFragment extends Fragment {
         templatesBinding = FragmentTemplatesBinding.inflate(getLayoutInflater());
         setTemplatesRv();
         handleAddFab();
+        fetchData();
         return templatesBinding.getRoot();
     }
 
@@ -64,10 +67,17 @@ public class TemplatesFragment extends Fragment {
 
             @Override
             public void onEdit(Template template) {
+                editTemplate(template);
 
             }
         });
         templatesBinding.templatesRv.setAdapter(templatesAdapter);
+    }
+
+    private void editTemplate(Template template) {
+        Intent intent = new Intent(getActivity(), EditTemplateActivity.class);
+        intent.putExtra("templates",template);
+        startActivity(intent);
     }
 
     private void fetchData() {
@@ -77,11 +87,15 @@ public class TemplatesFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
-                            List<Template> messages = task.getResult().toObjects(Template.class);
-                            if (messages != null) {
-                                templatesAdapter.setTemplates(messages);
+                            List<Template> templates = new ArrayList<>();
+                            for (QueryDocumentSnapshot document: task.getResult()) {
+                                Template template = document.toObject(Template.class);
+                                template.id = document.getId();
                             }
+                                templatesAdapter.setTemplates(templates);
+
 
                         } else {
                             Toast.makeText(getContext(), "failed to fetch data", Toast.LENGTH_SHORT).show();
@@ -98,7 +112,7 @@ public class TemplatesFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getContext(), "Successfully deleted the ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Successfully deleted the template ", Toast.LENGTH_SHORT).show();
                         fetchData();
                     }
                 });
