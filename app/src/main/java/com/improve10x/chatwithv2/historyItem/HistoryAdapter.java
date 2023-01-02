@@ -38,7 +38,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
         HistoryItem history = this.histories.get(position);
         holder.binding.nameTextTxt.setText(history.name);
         holder.binding.numberTextTxt.setText(history.number);
-        holder.binding.timeTextTxt.setText(history.time);
+        holder.binding.timeTextTxt.setText(history.sentMessageTimestamp + " ");
         holder.binding.messageTextTxt.setText(history.message);
         holder.binding.getRoot().setOnLongClickListener(view -> {
             holder.binding.actionLayout.setVisibility(View.VISIBLE);

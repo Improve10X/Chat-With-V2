@@ -9,8 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.databinding.FragmentHomeBinding;
+import com.improve10x.chatwithv2.historyItem.HistoryItem;
 
 
 public class HomeFragment extends Fragment {
@@ -36,6 +41,8 @@ public class HomeFragment extends Fragment {
             i.setData(Uri.parse(url));
             i.setPackage("com.whatsapp");
             startActivity(i);
+            long time = System.currentTimeMillis();
+            saveData(name, number, message,time);
         });
     }
 
@@ -49,6 +56,21 @@ public class HomeFragment extends Fragment {
             i.setData(Uri.parse(url));
             i.setPackage("com.whatsapp");
             startActivity(i);
+            long time = System.currentTimeMillis();
+            saveData(name, number, message, time);
         });
+    }
+
+    private void saveData(String name, String number, String message, long time) {
+        HistoryItem historyItem = new HistoryItem(message, name, number, time);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("history")
+                .add(historyItem)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Toast.makeText(getContext(), "successfully added the data", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

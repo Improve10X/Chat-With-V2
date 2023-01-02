@@ -4,17 +4,17 @@ public class HistoryItem {
     public String id;
     public String name;
     public String number;
-    public String time;
     public String message;
+    public long sentMessageTimestamp;
 
     public HistoryItem() {
     }
 
-    public HistoryItem(String messageTxt, String nameTxt, String numberTxt, String timeTxt) {
+    public HistoryItem(String messageTxt, String nameTxt, String numberTxt, long sentMessageTimestamp) {
         this.message = messageTxt;
         this.name = nameTxt;
         this.number = numberTxt;
-        this.time = timeTxt;
+        this.sentMessageTimestamp = sentMessageTimestamp;
 
     }
 }
