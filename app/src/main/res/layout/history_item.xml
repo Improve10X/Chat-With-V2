@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:orientation="vertical"
-    app:strokeColor="#BDBDBD"
+    app:strokeColor="#9095A0"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:text="TextView"
-                    android:textColor="#1B1A1A"
+                    android:textColor="#171A1F"
                     android:textSize="14sp" />
 
                 <TextView
@@ -46,7 +46,7 @@
                     android:layout_weight="1"
                     android:padding="2dp"
                     android:text="TextView"
-                    android:textColor="#1B1A1A"
+                    android:textColor="#171A1F"
                     android:textSize="14sp" />
 
                 <TextView
@@ -55,6 +55,7 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:text="TextView"
+                    android:textColor="#9095A0"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -72,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:padding="2dp"
                     android:text="TextView"
+                    android:textColor="#9095A0"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -81,6 +83,7 @@
             android:id="@+id/actionLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#9095A0"
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:visibility="gone">

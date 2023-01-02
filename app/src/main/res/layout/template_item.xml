@@ -7,7 +7,8 @@
     android:layout_margin="8dp"
     android:orientation="vertical"
     android:padding="4dp"
-    app:strokeColor="#BDBDBD"
+    app:cardBackgroundColor="#F3F4F6"
+    app:strokeColor="#9095A0"
     app:strokeWidth="1dp">
 
     <LinearLayout
@@ -18,7 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#EEEEEE"
+            android:background="#F3F4F6"
             android:orientation="vertical"
             android:paddingLeft="8dp"
             android:paddingTop="8dp"
@@ -47,6 +48,7 @@
             android:id="@+id/action_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="#F3F4F6"
             android:orientation="horizontal"
             android:visibility="gone">
 
