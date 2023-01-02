@@ -12,10 +12,10 @@ import com.improve10x.chatwithv2.databinding.HistoryItemBinding;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
-    private List<History> histories;
+    private List<HistoryItem> histories;
     private  OnItemActionListener onItemActionListener;
 
-    public void setHistories(List<History> histories) {
+    public void setHistories(List<HistoryItem> histories) {
         this.histories = histories;
         notifyDataSetChanged();
     }
@@ -34,7 +34,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        History history = this.histories.get(position);
+        HistoryItem history = this.histories.get(position);
         holder.binding.nameTextTxt.setText(history.name);
         holder.binding.numberTextTxt.setText(history.number);
         holder.binding.timeTextTxt.setText(history.time);

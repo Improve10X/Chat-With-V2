@@ -1,17 +1,16 @@
 package com.improve10x.chatwithv2.historyItem;
 
-public class History {
-
+public class HistoryItem {
     public String id;
     public String name;
     public String number;
     public String time;
     public String message;
 
-public History() {
+public HistoryItem() {
 
 }
-    public History(String messageTxt, String nameTxt, String numberTxt, String timeTxt) {
+    public HistoryItem(String messageTxt, String nameTxt, String numberTxt, String timeTxt) {
         this.message = messageTxt;
         this.name = nameTxt;
         this.number = numberTxt;

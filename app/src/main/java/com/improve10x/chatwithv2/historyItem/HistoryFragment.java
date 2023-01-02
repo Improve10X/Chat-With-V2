@@ -18,8 +18,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.chatwithv2.databinding.FragmentHistoryBinding;
-import com.improve10x.chatwithv2.historyItem.History;
-import com.improve10x.chatwithv2.historyItem.HistoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,7 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     private FragmentHistoryBinding historyBinding;
-    private ArrayList<History> histories;
+    private ArrayList<HistoryItem> histories;
     private HistoryAdapter historyAdapter;
 
     @Override
@@ -68,9 +66,9 @@ public class HistoryFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<History> historyList = new ArrayList<>();
+                            List<HistoryItem> historyList = new ArrayList<>();
                             for(QueryDocumentSnapshot document: task.getResult()) {
-                                History history = document.toObject(History.class);
+                                HistoryItem history = document.toObject(HistoryItem.class);
                                 history.id = document.getId();
                                 historyList.add(history);
                             }
