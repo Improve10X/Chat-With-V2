@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.improve10x.chatwithv2.historyItem.HistoryFragment;
 import com.improve10x.chatwithv2.HomeFragment;
-import com.improve10x.chatwithv2.TemplatesFragment;
+import com.improve10x.chatwithv2.templates.TemplatesFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
