@@ -1,4 +1,4 @@
-package com.improve10x.chatwithv2;
+package com.improve10x.chatwithv2.templates;
 
 import java.io.Serializable;
 

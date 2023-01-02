@@ -1,8 +1,7 @@
-package com.improve10x.chatwithv2;
+package com.improve10x.chatwithv2.templates;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
