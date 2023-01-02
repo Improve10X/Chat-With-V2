@@ -12,8 +12,9 @@ import com.improve10x.chatwithv2.databinding.HistoryItemBinding;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
+
     private List<HistoryItem> histories;
-    private  OnItemActionListener onItemActionListener;
+    private OnItemActionListener onItemActionListener;
 
     public void setHistories(List<HistoryItem> histories) {
         this.histories = histories;
@@ -27,7 +28,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
     @NonNull
     @Override
     public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        HistoryItemBinding binding = HistoryItemBinding.inflate(LayoutInflater.from(parent.getContext()),parent,false);
+        HistoryItemBinding binding = HistoryItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         HistoryViewHolder historyViewHolder = new HistoryViewHolder(binding);
         return historyViewHolder;
     }

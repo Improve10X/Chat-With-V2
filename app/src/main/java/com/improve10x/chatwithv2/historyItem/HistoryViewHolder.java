@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.chatwithv2.databinding.HistoryItemBinding;
 
-public class HistoryViewHolder extends RecyclerView.ViewHolder{
+public class HistoryViewHolder extends RecyclerView.ViewHolder {
 
     HistoryItemBinding binding;
 

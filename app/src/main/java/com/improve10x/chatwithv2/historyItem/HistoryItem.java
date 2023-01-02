@@ -7,9 +7,9 @@ public class HistoryItem {
     public String time;
     public String message;
 
-public HistoryItem() {
+    public HistoryItem() {
+    }
 
-}
     public HistoryItem(String messageTxt, String nameTxt, String numberTxt, String timeTxt) {
         this.message = messageTxt;
         this.name = nameTxt;

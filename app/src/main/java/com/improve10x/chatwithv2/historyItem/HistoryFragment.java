@@ -67,7 +67,7 @@ public class HistoryFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             List<HistoryItem> historyList = new ArrayList<>();
-                            for(QueryDocumentSnapshot document: task.getResult()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 HistoryItem history = document.toObject(HistoryItem.class);
                                 history.id = document.getId();
                                 historyList.add(history);

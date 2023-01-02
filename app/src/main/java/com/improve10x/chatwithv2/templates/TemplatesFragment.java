@@ -79,7 +79,7 @@ public class TemplatesFragment extends Fragment {
 
     private void editTemplate(Template template) {
         Intent intent = new Intent(getActivity(), EditTemplateActivity.class);
-        intent.putExtra("templates",template);
+        intent.putExtra("templates", template);
         startActivity(intent);
     }
 
@@ -93,12 +93,12 @@ public class TemplatesFragment extends Fragment {
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
                             List<Template> templates = new ArrayList<>();
-                            for (QueryDocumentSnapshot document: task.getResult()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 Template template = document.toObject(Template.class);
                                 template.id = document.getId();
                                 templates.add(template);
                             }
-                                templatesAdapter.setTemplates(templates);
+                            templatesAdapter.setTemplates(templates);
 
 
                         } else {

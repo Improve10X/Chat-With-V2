@@ -11,6 +11,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.databinding.ActivityAddTemplateBinding;
 
 public class AddTemplateActivity extends AppCompatActivity {
+
     private ActivityAddTemplateBinding binding;
 
     @Override

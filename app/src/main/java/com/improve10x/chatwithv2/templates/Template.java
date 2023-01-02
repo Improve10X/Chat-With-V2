@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Template implements Serializable {
 
     public String id;
-    
     public String messageText;
     public String titleText;
 
