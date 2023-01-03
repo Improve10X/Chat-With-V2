@@ -71,6 +71,7 @@ public class TemplatesFragment extends Fragment {
 
             @Override
             public void onClicked(Template template) {
+
                 onClick(template);
             }
         });
@@ -124,8 +125,9 @@ public class TemplatesFragment extends Fragment {
     }
 
     private void onClick(Template template) {
-        Intent intent = new Intent(getActivity(), HomeFragment.class);
-        intent.putExtra("templates", template);
-        startActivity(intent);
+     HomeFragment homeFragment = new HomeFragment();
+     Bundle bundle = new Bundle();
+     bundle.putSerializable("templates", template);
+     homeFragment.setArguments(bundle);
     }
 }
