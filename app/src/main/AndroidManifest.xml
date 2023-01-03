@@ -37,7 +37,7 @@
             android:name=".HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home_screen"
-            android:theme="@style/Theme.ChatWithV2.NoActionBar">
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
