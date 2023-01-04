@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.chatwithv2.databinding.HistoryItemBinding;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
@@ -38,7 +40,10 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
         HistoryItem history = this.histories.get(position);
         holder.binding.nameTextTxt.setText(history.name);
         holder.binding.numberTextTxt.setText(history.number);
-        holder.binding.timeTextTxt.setText(history.sentMessageTimestamp + " ");
+        Date date = new Date(history.sentMessageTimestamp);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm aa");
+        String displayDate = dateFormat.format(date);
+        holder.binding.timeTextTxt.setText(displayDate);
         holder.binding.messageTextTxt.setText(history.message);
         holder.binding.getRoot().setOnLongClickListener(view -> {
             holder.binding.actionLayout.setVisibility(View.VISIBLE);
