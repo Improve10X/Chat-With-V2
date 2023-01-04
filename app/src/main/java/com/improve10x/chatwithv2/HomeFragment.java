@@ -17,6 +17,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.databinding.FragmentHomeBinding;
 import com.improve10x.chatwithv2.historyItem.HistoryItem;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class HomeFragment extends Fragment {
 
@@ -28,6 +32,7 @@ public class HomeFragment extends Fragment {
         fragmentHomeBinding = FragmentHomeBinding.inflate(getLayoutInflater());
         handleWhatsappBtn();
         handleWhatsappBusinessBtn();
+        showDate(1641753000000L);
         return fragmentHomeBinding.getRoot();
     }
 
@@ -59,6 +64,14 @@ public class HomeFragment extends Fragment {
             long time = System.currentTimeMillis();
             saveData(name, number, message, time);
         });
+    }
+
+    private void showDate(long milliseconds)  {
+        Date date = new Date(milliseconds);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy hh:mm:ss:SSS aa");
+        String displayDate = dateFormat.format(date);
+
+
     }
 
     private void saveData(String name, String number, String message, long time) {
