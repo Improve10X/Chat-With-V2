@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.databinding.FragmentHomeBinding;
@@ -69,7 +71,8 @@ public class HomeFragment extends Fragment {
     private void saveData(String name, String number, String message, long time) {
         HistoryItem historyItem = new HistoryItem(message, name, number, time);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("history")
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/history")
                 .add(historyItem)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override

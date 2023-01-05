@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.databinding.ActivityEditTemplateBinding;
 
@@ -35,7 +37,8 @@ public class EditTemplateActivity extends AppCompatActivity {
     private void editTemplate(String id, String messageTxt, String titleTxt) {
         template = new Template(messageTxt, titleTxt);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("templates")
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/templates")
                 .document(id)
                 .set(template)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
