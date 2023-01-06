@@ -52,8 +52,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
         holder.binding.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(history.id);
         });
-
-
     }
 
     @Override

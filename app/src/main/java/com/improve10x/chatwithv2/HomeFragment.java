@@ -72,12 +72,14 @@ public class HomeFragment extends Fragment {
         HistoryItem historyItem = new HistoryItem(message, name, number, time);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        historyItem.id = db.collection("/users/" + "/id/" + "/history").document().getId();
         db.collection("/users/" + user.getUid() + "/history")
-                .add(historyItem)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(historyItem.id)
+                .set(historyItem)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getContext(), "successfully added the data", Toast.LENGTH_SHORT).show();
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getContext(), "Successfully added the data", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
