@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,12 +69,10 @@ public class TemplatesFragment extends Fragment {
             @Override
             public void onEdit(Template template) {
                 editTemplate(template);
-
             }
 
             @Override
             public void onClicked(Template template) {
-
                 onClick(template);
             }
         });
@@ -96,15 +95,13 @@ public class TemplatesFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
-                            List<Template> templates = new ArrayList<>();
+                            List<Template> templates = task.getResult().toObjects(Template.class);
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Template template = document.toObject(Template.class);
                                 template.id = document.getId();
                                 templates.add(template);
                             }
                             templatesAdapter.setTemplates(templates);
-
-
                         } else {
                             Toast.makeText(getContext(), "failed to fetch data", Toast.LENGTH_SHORT).show();
                         }
@@ -121,11 +118,16 @@ public class TemplatesFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getContext(), "Successfully deleted the template ", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Successfully deleted the template", Toast.LENGTH_SHORT).show();
                         fetchData();
                     }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed to delete the Template", Toast.LENGTH_SHORT).show();
+                    }
                 });
-
     }
 
     private void onClick(Template template) {

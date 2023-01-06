@@ -1,10 +1,12 @@
 package com.improve10x.chatwithv2.templates;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,8 +46,14 @@ public class EditTemplateActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(EditTemplateActivity.this, "Successfully edited the template", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditTemplateActivity.this, "Successfully edited the Template", Toast.LENGTH_SHORT).show();
                         finish();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(EditTemplateActivity.this, "Failed to edit the Template", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

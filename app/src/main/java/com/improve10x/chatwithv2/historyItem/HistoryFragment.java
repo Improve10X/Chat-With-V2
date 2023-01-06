@@ -21,6 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.chatwithv2.databinding.FragmentHistoryBinding;
+import com.improve10x.chatwithv2.templates.Template;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class HistoryFragment extends Fragment {
     private void deleteHistory(String id) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        db.collection("/users" + user.getUid())
+        db.collection("/users/" + user.getUid() + "/history")
                 .document(id)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -77,7 +78,7 @@ public class HistoryFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            List<HistoryItem> historyList = new ArrayList<>();
+                            List<HistoryItem> historyList = task.getResult().toObjects(HistoryItem.class);
                             historyAdapter.setHistoryItem(historyList);
                         } else {
                             Toast.makeText(getContext(), "failed to fetch data", Toast.LENGTH_SHORT).show();

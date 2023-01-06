@@ -40,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
     List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.PhoneBuilder().build());
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             signInLauncher.launch(signInIntent);
             Toast.makeText(this, "login successful", Toast.LENGTH_SHORT).show();
         });
-
     }
-
 
     private void updateUi() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -71,21 +68,14 @@ public class LoginActivity extends AppCompatActivity {
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
-            // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             updateUi();
-            // ...
         } else {
             Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show();
             updateUi();
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
         }
     }
-
 }

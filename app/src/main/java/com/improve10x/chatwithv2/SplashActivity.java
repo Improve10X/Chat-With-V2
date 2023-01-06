@@ -19,7 +19,6 @@ public class SplashActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             if (user != null) {
                 Intent intent = new Intent(this, HomeActivity.class);
@@ -30,7 +29,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-
         }, 3000);
     }
 }
