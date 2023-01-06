@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +29,7 @@ import java.util.List;
 public class HistoryFragment extends Fragment {
 
     private FragmentHistoryBinding historyBinding;
-    private ArrayList<HistoryItem> histories;
+    private ArrayList<HistoryItem> historyItem;
     private HistoryAdapter historyAdapter;
 
     @Override
@@ -58,6 +59,12 @@ public class HistoryFragment extends Fragment {
                         Toast.makeText(getContext(), "Successfully deleted", Toast.LENGTH_SHORT).show();
                         fetchData();
                     }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "Failed to delete History", Toast.LENGTH_SHORT).show();
+                    }
                 });
     }
 
@@ -71,12 +78,7 @@ public class HistoryFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             List<HistoryItem> historyList = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                HistoryItem history = document.toObject(HistoryItem.class);
-                                history.id = document.getId();
-                                historyList.add(history);
-                            }
-                            historyAdapter.setHistories(historyList);
+                            historyAdapter.setHistoryItem(historyList);
                         } else {
                             Toast.makeText(getContext(), "failed to fetch data", Toast.LENGTH_SHORT).show();
                         }
@@ -87,7 +89,7 @@ public class HistoryFragment extends Fragment {
     private void setHistoryRv() {
         historyBinding.historyRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         historyAdapter = new HistoryAdapter();
-        historyAdapter.setHistories(histories);
+        historyAdapter.setHistoryItem(historyItem);
         historyAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemDelete(String id) {
@@ -98,6 +100,6 @@ public class HistoryFragment extends Fragment {
     }
 
     private void setupData() {
-        histories = new ArrayList<>();
+        historyItem = new ArrayList<>();
     }
 }
