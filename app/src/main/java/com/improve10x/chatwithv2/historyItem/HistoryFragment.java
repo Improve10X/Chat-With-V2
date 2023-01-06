@@ -79,11 +79,6 @@ public class HistoryFragment extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             List<HistoryItem> historyList = task.getResult().toObjects(HistoryItem.class);
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                HistoryItem historyItem = document.toObject(HistoryItem.class);
-                                historyItem.id = document.getId();
-                                historyList.add(historyItem);
-                            }
                             historyAdapter.setHistoryItem(historyList);
                         } else {
                             Toast.makeText(getContext(), "failed to fetch data", Toast.LENGTH_SHORT).show();

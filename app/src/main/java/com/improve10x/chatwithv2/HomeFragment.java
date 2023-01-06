@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
         HistoryItem historyItem = new HistoryItem(message, name, number, time);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        historyItem.id = db.collection("/users/" + "/id/" + "/history").document().getId();
+        historyItem.id = db.collection("/users/" + user.getUid() + "/history").document().getId();
         db.collection("/users/" + user.getUid() + "/history")
                 .document(historyItem.id)
                 .set(historyItem)
