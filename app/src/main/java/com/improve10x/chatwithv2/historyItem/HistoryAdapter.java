@@ -15,11 +15,11 @@ import java.util.List;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 
-    private List<HistoryItem> histories;
+    private List<HistoryItem> historyItem;
     private OnItemActionListener onItemActionListener;
 
-    public void setHistories(List<HistoryItem> histories) {
-        this.histories = histories;
+    public void setHistoryItem(List<HistoryItem> historyItem) {
+        this.historyItem = historyItem;
         notifyDataSetChanged();
     }
 
@@ -37,7 +37,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull HistoryViewHolder holder, int position) {
-        HistoryItem history = this.histories.get(position);
+        HistoryItem history = this.historyItem.get(position);
         holder.binding.nameTextTxt.setText(history.name);
         holder.binding.numberTextTxt.setText(history.number);
         Date date = new Date(history.sentMessageTimestamp);
@@ -58,6 +58,6 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 
     @Override
     public int getItemCount() {
-        return histories.size();
+        return historyItem.size();
     }
 }
