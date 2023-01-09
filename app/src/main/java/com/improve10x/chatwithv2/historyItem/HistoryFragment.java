@@ -39,6 +39,14 @@ public class HistoryFragment extends BaseFragment {
         return historyBinding.getRoot();
     }
 
+    private void hideProgressBar() {
+        historyBinding.historyProgressBar.setVisibility(View.GONE);
+    }
+
+    private void showProgressBar() {
+        historyBinding.historyProgressBar.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -67,6 +75,7 @@ public class HistoryFragment extends BaseFragment {
     }
 
     private void fetchData() {
+        showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/history")
@@ -74,6 +83,7 @@ public class HistoryFragment extends BaseFragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        hideProgressBar();
                         if (task.isSuccessful()) {
                             List<HistoryItem> historyList = task.getResult().toObjects(HistoryItem.class);
                             historyAdapter.setHistoryItem(historyList);
