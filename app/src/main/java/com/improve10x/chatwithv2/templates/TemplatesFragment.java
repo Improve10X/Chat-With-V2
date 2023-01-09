@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -21,6 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.chatwithv2.base.BaseFragment;
 import com.improve10x.chatwithv2.HomeFragment;
 import com.improve10x.chatwithv2.databinding.FragmentTemplatesBinding;
 
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class TemplatesFragment extends Fragment {
+public class TemplatesFragment extends BaseFragment {
 
     private FragmentTemplatesBinding templatesBinding;
     private ArrayList<Template> templates = new ArrayList<>();
@@ -103,7 +103,7 @@ public class TemplatesFragment extends Fragment {
                             }
                             templatesAdapter.setTemplates(templates);
                         } else {
-                            Toast.makeText(getContext(), "failed to fetch data", Toast.LENGTH_SHORT).show();
+                            showToast("failed to fetch data");
                         }
                     }
                 });
@@ -118,14 +118,14 @@ public class TemplatesFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getContext(), "Successfully deleted the template", Toast.LENGTH_SHORT).show();
+                        showToast("Successfully deleted the template");
                         fetchData();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getContext(), "Failed to delete the Template", Toast.LENGTH_SHORT).show();
+                       showToast("Failed to delete the Template");
                     }
                 });
     }
