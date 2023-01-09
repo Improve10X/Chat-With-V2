@@ -4,27 +4,23 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.annotation.NonNull;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.improve10x.chatwithv2.base.BaseFragment;
 import com.improve10x.chatwithv2.databinding.FragmentHomeBinding;
 import com.improve10x.chatwithv2.historyItem.HistoryItem;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
-
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
 
     private FragmentHomeBinding fragmentHomeBinding;
 
@@ -79,7 +75,13 @@ public class HomeFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(getContext(), "Successfully added the data", Toast.LENGTH_SHORT).show();
+                        showToast("Successfully added the data");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("Failed to add data");
                     }
                 });
     }
