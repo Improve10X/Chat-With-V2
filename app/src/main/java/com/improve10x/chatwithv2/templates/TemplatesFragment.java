@@ -43,6 +43,14 @@ public class TemplatesFragment extends BaseFragment {
         return templatesBinding.getRoot();
     }
 
+    private void hideProgressBar() {
+        templatesBinding.templatesProgressBar.setVisibility(View.GONE);
+    }
+
+    private void showProgressBar() {
+        templatesBinding.templatesProgressBar.setVisibility(View.VISIBLE);
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -86,6 +94,7 @@ public class TemplatesFragment extends BaseFragment {
     }
 
     private void fetchData() {
+        showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/templates")
@@ -93,6 +102,7 @@ public class TemplatesFragment extends BaseFragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        hideProgressBar();
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
                             List<Template> templates = task.getResult().toObjects(Template.class);
