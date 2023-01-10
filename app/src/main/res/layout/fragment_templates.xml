@@ -39,4 +39,25 @@
         app:layout_constraintEnd_toEndOf="@+id/templatesRv"
         app:layout_constraintStart_toStartOf="@+id/templatesRv"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="87dp"
+        android:layout_height="26dp"
+        android:text="Please Wait"
+        android:textColor="#121111"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/templates_progress_bar"
+        app:layout_constraintStart_toStartOf="@+id/templates_progress_bar"
+        tools:layout_editor_absoluteY="423dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/template_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="templates_progress_bar,textView4"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="4dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

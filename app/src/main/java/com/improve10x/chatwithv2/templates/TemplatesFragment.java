@@ -44,11 +44,11 @@ public class TemplatesFragment extends BaseFragment {
     }
 
     private void hideProgressBar() {
-        templatesBinding.templatesProgressBar.setVisibility(View.GONE);
+        templatesBinding.templateProgressbar.setVisibility(View.GONE);
     }
 
     private void showProgressBar() {
-        templatesBinding.templatesProgressBar.setVisibility(View.VISIBLE);
+        templatesBinding.templateProgressbar.setVisibility(View.VISIBLE);
     }
 
     @Override

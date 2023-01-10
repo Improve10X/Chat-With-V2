@@ -40,11 +40,11 @@ public class HistoryFragment extends BaseFragment {
     }
 
     private void hideProgressBar() {
-        historyBinding.historyProgressBar.setVisibility(View.GONE);
+        historyBinding.groupProgressbar.setVisibility(View.GONE);
     }
 
     private void showProgressBar() {
-        historyBinding.historyProgressBar.setVisibility(View.VISIBLE);
+        historyBinding.groupProgressbar.setVisibility(View.VISIBLE);
     }
 
     @Override
