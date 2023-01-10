@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="4dp"
     tools:context=".historyItem.HistoryFragment">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history_rv"
@@ -21,6 +17,31 @@
         android:id="@+id/history_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerHorizontal="true" />
-</RelativeLayout>
+        android:layout_centerVertical="true"
+        app:layout_constraintBottom_toBottomOf="@+id/history_rv"
+        app:layout_constraintEnd_toEndOf="@+id/history_rv"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/history_rv"
+        app:layout_constraintTop_toTopOf="@+id/history_rv" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please Wait"
+        android:textColor="#0E0E0E"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/history_progress_bar"
+        app:layout_constraintStart_toStartOf="@+id/history_progress_bar"
+        tools:layout_editor_absoluteY="398dp" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="history_progress_bar,textView3"
+        tools:layout_editor_absoluteX="4dp"
+        tools:layout_editor_absoluteY="4dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
