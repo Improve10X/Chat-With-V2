@@ -62,23 +62,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingTop="24dp">
 
         <Button
             android:id="@+id/wabusiness_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginRight="12dp"
             android:layout_weight="1"
-            android:text="WA Business" />
+            android:text="Wa Business"
+            android:textAllCaps="false"
+            app:cornerRadius="16dp" />
 
         <Button
             android:id="@+id/whatsapp_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="23dp"
+            android:layout_gravity="right"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="12dp"
             android:layout_weight="1"
-            android:text="WhatsApp" />
+            android:text="WhatsApp"
+            android:textAllCaps="false"
+            app:cornerRadius="16dp" />
+
     </LinearLayout>
 </LinearLayout>
