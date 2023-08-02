@@ -54,7 +54,7 @@
             android:orientation="horizontal"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/editBtn"
