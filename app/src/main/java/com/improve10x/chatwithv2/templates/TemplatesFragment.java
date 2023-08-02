@@ -110,10 +110,11 @@ public class TemplatesFragment extends BaseFragment {
                         hideProgressBar();
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
-                            List<Template> templates = task.getResult().toObjects(Template.class);
+                            List<Template> templates = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Template template = document.toObject(Template.class);
                                 template.id = document.getId();
+                                templates.add(template);
                             }
                             templatesAdapter.setTemplates(templates);
                         } else {
