@@ -51,6 +51,13 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
         });
         holder.binding.deleteBtn.setOnClickListener(view -> {
             onItemActionListener.onItemDelete(history.id);
+            holder.binding.deleteBtn.setVisibility(View.GONE);
+            holder.binding.addToTemplatesBtn.setVisibility(View.GONE);
+        });
+        holder.binding.addToTemplatesBtn.setOnClickListener(view -> {
+            onItemActionListener.saveTemplates(history.message);
+            holder.binding.deleteBtn.setVisibility(View.GONE);
+            holder.binding.addToTemplatesBtn.setVisibility(View.GONE);
         });
     }
 

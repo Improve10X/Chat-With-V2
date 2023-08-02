@@ -15,4 +15,8 @@ public class Template implements Serializable {
         this.messageText = messageTxt;
         this.titleText = titleText;
     }
+
+    public Template(String messageTxt) {
+        this.messageText = messageTxt;
+    }
 }

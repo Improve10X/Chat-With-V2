@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.chatwithv2.base.BaseFragment;
 import com.improve10x.chatwithv2.databinding.FragmentHistoryBinding;
+import com.improve10x.chatwithv2.templates.Template;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,8 +105,35 @@ public class HistoryFragment extends BaseFragment {
             public void onItemDelete(String id) {
                 deleteHistory(id);
             }
+
+            @Override
+            public void saveTemplates(String message) {
+                addToTemplates(message);
+            }
         });
         historyBinding.historyRv.setAdapter(historyAdapter);
+    }
+
+    private void addToTemplates(String messageTxt) {
+        Template template = new Template(messageTxt);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        template.id = db.collection("templates").document().getId();
+        db.collection("/users/" + user.getUid() + "/templates")
+                .document(template.id)
+                .set(template)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        showToast("Successfully added the Template");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        showToast("Failed to add Template");
+                    }
+                });
     }
 
     private void setupData() {
