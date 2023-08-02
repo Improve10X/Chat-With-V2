@@ -97,7 +97,8 @@
                 android:layout_marginEnd="12dp"
                 android:text="Add to Templates"
                 android:textAllCaps="false"
-                android:visibility="visible" />
+                android:visibility="visible"
+                app:cornerRadius="16dp" />
 
             <Button
                 android:id="@+id/delete_btn"
@@ -109,7 +110,8 @@
                 android:text="Delete"
                 android:textAllCaps="false"
                 android:textSize="16sp"
-                android:visibility="visible" />
+                android:visibility="visible"
+                app:cornerRadius="16dp" />
         </LinearLayout>
 
     </LinearLayout>
