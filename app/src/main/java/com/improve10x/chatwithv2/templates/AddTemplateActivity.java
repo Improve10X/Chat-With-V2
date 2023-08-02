@@ -45,7 +45,6 @@ public class AddTemplateActivity extends BaseActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                       showToast("Successfully added the Template");
                         finish();
                     }
                 })
