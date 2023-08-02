@@ -47,6 +47,8 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
         holder.binding.messageTextTxt.setText(history.message);
         holder.binding.getRoot().setOnLongClickListener(view -> {
             holder.binding.actionLayout.setVisibility(View.VISIBLE);
+            holder.binding.deleteBtn.setVisibility(View.VISIBLE);
+            holder.binding.addToTemplatesBtn.setVisibility(View.VISIBLE);
             return true;
         });
         holder.binding.deleteBtn.setOnClickListener(view -> {

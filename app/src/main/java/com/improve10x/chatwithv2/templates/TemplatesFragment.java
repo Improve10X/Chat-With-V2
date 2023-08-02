@@ -114,7 +114,6 @@ public class TemplatesFragment extends BaseFragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Template template = document.toObject(Template.class);
                                 template.id = document.getId();
-                                templates.add(template);
                             }
                             templatesAdapter.setTemplates(templates);
                         } else {
