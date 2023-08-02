@@ -37,6 +37,7 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
     public void onBindViewHolder(@NonNull TemplateViewHolder holder, int position) {
         Template template = this.templates.get(position);
         holder.binding.messageTextTxt.setText(template.messageText);
+
         if (template.titleText == null || template.titleText.isEmpty()) {
             holder.binding.titleTxt.setVisibility(View.GONE);
         } else {
@@ -45,6 +46,8 @@ public class TemplatesAdapter extends RecyclerView.Adapter<TemplateViewHolder> {
         }
         holder.binding.getRoot().setOnLongClickListener(view -> {
             holder.binding.actionLayout.setVisibility(View.VISIBLE);
+            holder.binding.editBtn.setVisibility(View.VISIBLE);
+            holder.binding.deleteBtn.setVisibility(View.VISIBLE);
             return true;
         });
         holder.binding.deleteBtn.setOnClickListener(view -> {
