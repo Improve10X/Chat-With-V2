@@ -67,7 +67,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
 
     public String getDisplayDate(long secondsInMills) {
         if (secondsInMills <= 0) {
-            throw new InvalidTimeStampException();
+            return "";
         }
         Calendar instantCal = Calendar.getInstance();
         instantCal.setTimeInMillis(secondsInMills);
@@ -97,7 +97,5 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryViewHolder> {
     private boolean isSameDay(Calendar instantCal, Calendar currentCal) {
         return instantCal.get(Calendar.YEAR) == currentCal.get(Calendar.YEAR) &&
                 instantCal.get(Calendar.DAY_OF_MONTH) == currentCal.get(Calendar.DAY_OF_MONTH);
-    }
-    public class InvalidTimeStampException extends RuntimeException {
     }
 }
