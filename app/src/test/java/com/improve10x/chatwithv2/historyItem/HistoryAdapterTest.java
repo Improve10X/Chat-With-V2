@@ -7,10 +7,6 @@ import org.junit.Test;
 
 public class HistoryAdapterTest extends TestCase {
     private HistoryAdapter historyAdapter;
-    @Test
-    public void nothing(){
-
-    }
 
     @Test
     public void given0_returnEmpty(){
