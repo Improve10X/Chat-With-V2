@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -15,13 +16,15 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.improve10x.chatwithv2.base.BaseActivity;
+import com.improve10x.chatwithv2.databinding.ActivityLoginBinding;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class LoginActivity extends BaseActivity {
 
-    private Button loginBtn;
+    private ActivityLoginBinding binding;
+    private FirebaseAuth firebaseAuth;
 
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
@@ -39,10 +42,11 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        firebaseAuth = FirebaseAuth.getInstance();
         getSupportActionBar().hide();
-        loginBtn = findViewById(R.id.login_btn);
-        loginBtn.setOnClickListener(view -> {
+        binding.loginBtn.setOnClickListener(view -> {
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
@@ -50,14 +54,15 @@ public class LoginActivity extends BaseActivity {
             signInLauncher.launch(signInIntent);
             showToast("login successful");
         });
+        handleGuestLoginBtn();
     }
 
     private void updateUi() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null) {
-            loginBtn.setVisibility(View.GONE);
+        if (user != null) {
+            binding.loginBtn.setVisibility(View.GONE);
         } else {
-            loginBtn.setVisibility(View.VISIBLE);
+            binding.loginBtn.setVisibility(View.VISIBLE);
         }
     }
 
@@ -73,5 +78,20 @@ public class LoginActivity extends BaseActivity {
             showToast("Login Failed");
             updateUi();
         }
+    }
+
+    private void handleGuestLoginBtn() {
+        binding.guestLogingBtn.setOnClickListener(view -> {
+            firebaseAuth.signInAnonymously()
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(this, HomeActivity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(this, "Login As Guest Failed", Toast.LENGTH_SHORT).show();
+                    });
+        });
     }
 }
