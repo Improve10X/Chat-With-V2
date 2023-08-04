@@ -50,6 +50,7 @@ public class LoginActivity extends BaseActivity {
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
+                    .setTheme(androidx.appcompat.R.style.Base_Theme_AppCompat)
                     .build();
             signInLauncher.launch(signInIntent);
             showToast("login successful");
