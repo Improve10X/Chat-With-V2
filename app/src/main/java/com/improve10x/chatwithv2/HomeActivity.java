@@ -100,7 +100,7 @@ public class HomeActivity extends BaseActivity {
                         }
                     });
             return true;
-        } else if (item.getItemId() == R.id.login){
+        } else if (item.getItemId() == R.id.login) {
             Intent signInIntent = AuthUI.getInstance()
                     .createSignInIntentBuilder()
                     .setAvailableProviders(providers)
@@ -108,9 +108,9 @@ public class HomeActivity extends BaseActivity {
             signInLauncher.launch(signInIntent);
             showToast("login successful");
             return true;
-        }else {
+        } else {
             return super.onOptionsItemSelected(item);
-    }
+        }
     }
 
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {

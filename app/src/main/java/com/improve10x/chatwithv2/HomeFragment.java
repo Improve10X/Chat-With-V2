@@ -45,7 +45,7 @@ public class HomeFragment extends BaseFragment {
             i.setPackage("com.whatsapp");
             startActivity(i);
             long time = System.currentTimeMillis();
-            saveData(name, number, message,time);
+            saveData(name, number, message, time);
         });
     }
 
