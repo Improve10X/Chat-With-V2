@@ -55,7 +55,10 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/message_txt"
             android:layout_width="match_parent"
-            android:layout_height="173dp" />
+            android:layout_height="160dp"
+            android:gravity="top|left"
+            android:singleLine="false"
+            android:textAlignment="gravity" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

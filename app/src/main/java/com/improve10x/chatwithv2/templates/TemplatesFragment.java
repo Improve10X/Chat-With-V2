@@ -1,5 +1,7 @@
 package com.improve10x.chatwithv2.templates;
 
+import static com.improve10x.chatwithv2.base.ExtensionsKt.showToast;
+
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -20,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.chatwithv2.HomeActivity;
 import com.improve10x.chatwithv2.base.BaseFragment;
 import com.improve10x.chatwithv2.HomeFragment;
 import com.improve10x.chatwithv2.databinding.FragmentTemplatesBinding;
@@ -105,7 +108,7 @@ public class TemplatesFragment extends BaseFragment {
                         hideProgressBar();
                         Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                         if (task.isSuccessful()) {
-                            List<Template> templates = task.getResult().toObjects(Template.class);
+                            List<Template> templates = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Template template = document.toObject(Template.class);
                                 template.id = document.getId();
@@ -113,7 +116,7 @@ public class TemplatesFragment extends BaseFragment {
                             }
                             templatesAdapter.setTemplates(templates);
                         } else {
-                            showToast("failed to fetch data");
+                            showToast(getContext(),"failed to fetch data");
                         }
                     }
                 });
@@ -135,15 +138,14 @@ public class TemplatesFragment extends BaseFragment {
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                       showToast("Failed to delete the Template");
+                        showToast("Failed to delete the Template");
                     }
                 });
     }
 
     private void onClick(Template template) {
-     HomeFragment homeFragment = new HomeFragment();
-     Bundle bundle = new Bundle();
-     bundle.putSerializable("templates", template);
-     homeFragment.setArguments(bundle);
+        if(getActivity() instanceof HomeActivity) {
+            ((HomeActivity)getActivity()).openHome(template);
+        }
     }
 }

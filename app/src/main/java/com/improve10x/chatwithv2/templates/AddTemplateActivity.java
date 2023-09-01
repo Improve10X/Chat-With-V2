@@ -12,6 +12,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.base.BaseActivity;
 import com.improve10x.chatwithv2.databinding.ActivityAddTemplateBinding;
 
+import java.util.Objects;
+
 public class AddTemplateActivity extends BaseActivity {
 
     private ActivityAddTemplateBinding binding;
@@ -21,7 +23,7 @@ public class AddTemplateActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddTemplateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSupportActionBar().setTitle("Add Template");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Add Template");
         handleAddBtn();
     }
 

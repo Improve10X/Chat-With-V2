@@ -3,12 +3,12 @@ package com.improve10x.chatwithv2;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-
+import android.telephony.PhoneNumberUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.chatwithv2.base.BaseFragment;
 import com.improve10x.chatwithv2.databinding.FragmentHomeBinding;
 import com.improve10x.chatwithv2.historyItem.HistoryItem;
-
+import com.improve10x.chatwithv2.templates.Template;
 
 public class HomeFragment extends BaseFragment {
 
@@ -30,8 +30,23 @@ public class HomeFragment extends BaseFragment {
         fragmentHomeBinding = FragmentHomeBinding.inflate(getLayoutInflater());
         handleWhatsappBtn();
         handleWhatsappBusinessBtn();
-
         return fragmentHomeBinding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        showTemplateIfNeeded();
+    }
+
+    private void showTemplateIfNeeded() {
+        if (getActivity() instanceof HomeActivity) {
+            Template selectedTemplate = ((HomeActivity) getActivity()).selectedTemplate;
+            if(selectedTemplate != null) {
+                fragmentHomeBinding.messageTxt.setText(selectedTemplate.messageText);
+                ((HomeActivity) getActivity()).selectedTemplate = null;
+            }
+        }
     }
 
     private void handleWhatsappBtn() {
@@ -45,7 +60,7 @@ public class HomeFragment extends BaseFragment {
             i.setPackage("com.whatsapp");
             startActivity(i);
             long time = System.currentTimeMillis();
-            saveData(name, number, message,time);
+            saveData(name, number, message, time);
         });
     }
 
@@ -72,17 +87,7 @@ public class HomeFragment extends BaseFragment {
         db.collection("/users/" + user.getUid() + "/history")
                 .document(historyItem.id)
                 .set(historyItem)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        showToast("Successfully added the data");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        showToast("Failed to add data");
-                    }
-                });
+                .addOnSuccessListener(unused -> {})
+                .addOnFailureListener(e -> {});
     }
 }

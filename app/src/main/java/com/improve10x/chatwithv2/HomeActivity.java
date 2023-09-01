@@ -2,44 +2,38 @@ package com.improve10x.chatwithv2;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.firebase.ui.auth.AuthUI;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-import com.improve10x.chatwithv2.ui.main.SectionsPagerAdapter;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.material.tabs.TabLayoutMediator;
 import com.improve10x.chatwithv2.databinding.ActivityHomeScreenBinding;
+import com.improve10x.chatwithv2.templates.Template;
+import com.improve10x.chatwithv2.ui.main.HomeTabsAdapter;
 
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeScreenBinding binding;
-
+    private HomeTabsAdapter homeTabsAdapter;
+    Template selectedTemplate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityHomeScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = binding.viewPager;
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = binding.tabs;
-        tabs.setupWithViewPager(viewPager);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Chat With");
+        }
+        homeTabsAdapter = new HomeTabsAdapter(this);
+        binding.viewPager.setAdapter(homeTabsAdapter);
+        new TabLayoutMediator(binding.tabs, binding.viewPager, (tab, position) -> {
+            tab.setText(homeTabsAdapter.tabTitles[position]);
+        }).attach();
     }
 
     @Override
@@ -51,18 +45,25 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logout){
-                AuthUI.getInstance()
-                        .signOut(this)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        });
-                return true;
+            logout();
+            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void logout() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(task -> {
+                    Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                    finish();
+                });
+    }
+
+    public void openHome(Template template) {
+        selectedTemplate = template;
+        binding.viewPager.setCurrentItem(0, true);
     }
 }
